@@ -52,7 +52,7 @@ s_p500.forEach(function(stock) {
         console.log("Stock: " + stock + ", Day before yesterday: " + daybeforeyesterday + ", Yesterday: " + yesterday + ", Today: " + today);
                     
         if (today != 0 && yesterday != 0) {
-            let yesterdayToTodayPercentage = ((yesterday - today)/yesterday) * 100;
+            let yesterdayToTodayPercentage = ((today - yesterday)/today) * 100;
             let daybeforeyesterdayToYesterdayPercentage = ((daybeforeyesterday - yesterday)/daybeforeyesterday) * 100;
             console.log("Day Before Yesterday To Yesterday drop: " + daybeforeyesterdayToYesterdayPercentage + ", Yesterday to Today Drop: " + yesterdayToTodayPercentage);
                 
@@ -125,7 +125,7 @@ setInterval(function() {
               console.log("Stock: " + stock + ", Day before yesterday: " + daybeforeyesterday + ", Yesterday: " + yesterday + ", Today: " + today);
               
               if (today != 0 && yesterday != 0) {
-                let yesterdayToTodayPercentage = ((yesterday - today)/yesterday) * 100;
+                let yesterdayToTodayPercentage = ((today - yesterday)/today) * 100;
                 let daybeforeyesterdayToYesterdayPercentage = ((daybeforeyesterday - yesterday)/daybeforeyesterday) * 100;
                 console.log("Day Before Yesterday To Yesterday drop: " + daybeforeyesterdayToYesterdayPercentage + ", Yesterday to Today Drop: " + yesterdayToTodayPercentage);
         
@@ -137,4 +137,4 @@ setInterval(function() {
             });
         });
     }
-},500000);
+},3000);
