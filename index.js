@@ -91,7 +91,7 @@ setInterval(function() {
 
     newDate = new Date(nyc);
 
-    console.log('Date in refresh: ' + newDate.toLocaleString());
+    console.log('Date in refresh: ' + newDate.toLocaleString() + ", Number of losers: " + losers.length);
 
     if (lastDateRefreshed.getDay() != newDate.getDay()) {
         lastDateRefreshed = newDate;
@@ -143,4 +143,4 @@ setInterval(function() {
             });
         });
     }
-},3000);
+},5000);
