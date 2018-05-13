@@ -8,7 +8,7 @@ var losers = [];
 var percentages = [];
 
 lastDateRefreshed = new Date();
-s_p500.forEach(function(stock) {
+s_p500test.forEach(function(stock) {
     let today = 0, yesterday = 0, daybeforeyesterday = 0;
     let url1 = "https://www.investopedia.com/markets/stocks/" + stock.toLowerCase() + "/historical/"
         
@@ -17,13 +17,10 @@ s_p500.forEach(function(stock) {
             
         var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
         indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         indexOfhigh = indexOfhigh + 16;
         indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
         today = response.substring(indexOfhigh,indexOfHighEnd);
                         
-        indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
@@ -73,7 +70,7 @@ setInterval(function() {
     if (lastDateRefreshed.getDay() != new Date().getDay()) {
         lastDateRefreshed = new Date();
         losers = [];
-        s_p500.forEach(function(stock) {
+        s_p500test.forEach(function(stock) {
             let today = 0, yesterday = 0, daybeforeyesterday = 0;
             let url1 = "https://www.investopedia.com/markets/stocks/" + stock.toLowerCase() + "/historical/"
         
@@ -82,14 +79,10 @@ setInterval(function() {
         
               var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
               indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-              indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
               indexOfhigh = indexOfhigh + 16;
               indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
               today = response.substring(indexOfhigh,indexOfHighEnd);
               
-              indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-              indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-              indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
               indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
               indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
               indexOfhigh = indexOfhigh + 16;
