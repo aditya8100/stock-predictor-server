@@ -65,6 +65,10 @@ app.get("/losers", (req,res) => {
     res.status(200).send(response);
 });
 
+app.get("/",(req,res) => {
+    res.status(200).send("Endpoint doesn't exist.!")
+});
+
 setInterval(function() {
     if (lastDateRefreshed.getDay() != new Date().getDay()) {
         lastDateRefreshed = new Date();
