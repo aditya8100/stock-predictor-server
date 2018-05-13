@@ -7,8 +7,19 @@ var s_p500test = ["A","AAL","AAP","AAPL","ABBV","ABC","ABT","ACN","ADBE","COTY"]
 var losers = [];
 var percentages = [];
 
-lastDateRefreshed = new Date();
-s_p500test.forEach(function(stock) {
+var date = new Date();
+var localTime = date.getTime();
+var localOffset = date.getTimezoneOffset() * 60000;
+var utc = localTime + localOffset;
+
+var offset = -4;
+var nyc = utc + (3600000 * offset);
+
+lastDateRefreshed = new Date(nyc);
+
+console.log("Date in initial: " + lastDateRefreshed.toLocaleString());
+
+s_p500.forEach(function(stock) {
     let today = 0, yesterday = 0, daybeforeyesterday = 0;
     let url1 = "https://www.investopedia.com/markets/stocks/" + stock.toLowerCase() + "/historical/"
         
@@ -67,10 +78,22 @@ app.get("/",(req,res) => {
 });
 
 setInterval(function() {
-    if (lastDateRefreshed.getDay() != new Date().getDay()) {
-        lastDateRefreshed = new Date();
+    date = new Date();
+    localTime = date.getTime();
+    localOffset = date.getTimezoneOffset() * 60000;
+    utc = localTime + localOffset;
+
+    offset = -4;
+    nyc = utc + (3600000 * offset);
+
+    newDate = new Date(nyc);
+
+    console.log('Date in refresh: ' + newDate.toLocaleString());
+
+    if (lastDateRefreshed.getDay() != newDate.getDay()) {
+        lastDateRefreshed = newDate;
         losers = [];
-        s_p500test.forEach(function(stock) {
+        s_p500.forEach(function(stock) {
             let today = 0, yesterday = 0, daybeforeyesterday = 0;
             let url1 = "https://www.investopedia.com/markets/stocks/" + stock.toLowerCase() + "/historical/"
         
@@ -114,4 +137,4 @@ setInterval(function() {
             });
         });
     }
-},3000);
+},500000);
