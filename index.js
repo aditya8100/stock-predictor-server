@@ -26,6 +26,7 @@ s_p500.forEach(function(stock) {
     request.get(url1, (err,body,response) => {
         if (err != null) {
             console.log(err);
+            return;
         }
         console.log("Inside initial request: " + stock);
             
@@ -96,12 +97,17 @@ setInterval(function() {
     if (lastDateRefreshed.getDay() != newDate.getDay()) {
         lastDateRefreshed = newDate;
         losers = [];
+        percentages = [];
         s_p500.forEach(function(stock) {
             let open = 0, close = 0;
             let url1 = "https://www.investopedia.com/markets/stocks/" + stock.toLowerCase() + "/historical/"
                 
             request.get(url1, (err,body,response) => {
-                console.log("Inside initial request!");
+                console.log("Inside refresh request!");
+                if (err != null) {
+                    console.log(err);
+                    return;
+                }
                     
                 var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
                 indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
