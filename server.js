@@ -11,7 +11,7 @@ var date = new Date();
 var localTime = date.getTime();
 var localOffset = date.getTimezoneOffset() * 60000;
 var utc = localTime + localOffset;
-
+var stockCounter = 1;
 var offset = -4;
 var nyc = utc + (3600000 * offset);
 
@@ -28,7 +28,7 @@ s_p500.forEach(function(stock) {
             console.log(err);
             return;
         }
-        console.log("Inside initial request: " + stock);
+        console.log(stockCounter + ": Inside initial request: " + stock);
             
         var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
         var indexOfDate = indexOfhigh + ("<tr class=\"in-the-money\">").length + ("<td class=\"date\">").length + 9;
@@ -69,7 +69,8 @@ s_p500.forEach(function(stock) {
                 percentages.push(percentageDrop);
                 console.log('Number of entries: ' + losers.size)
             }
-        }    
+        }  
+        stockCounter++;  
     });
 });
 
