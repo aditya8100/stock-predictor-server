@@ -73,7 +73,7 @@ s_p500.forEach(function(stock) {
 app.listen(process.env.PORT || 1337, () => console.log('server is listening'));
 
 app.get("/losers", (req,res) => {
-    var response = {"losers": losers, "percentages": percentages};
+    var response = {"date": lastDateRefreshed, "losers": losers, "percentages": percentages};
     res.status(200).send(response);
 });
 
