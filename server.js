@@ -32,7 +32,7 @@ s_p500.forEach(function(stock) {
             
         var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
         var indexOfDate = indexOfhigh + ("<tr class=\"in-the-money\">").length + ("<td class=\"date\">").length + 9;
-        var indexOfDateEnd = response.indexOf("</td>",indexOfDate+1);
+        var indexOfDateEnd = response.indexOf("</td>",indexOfDate);
         dateToSend = response.substring(indexOfDate,indexOfDateEnd);
         indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         indexOfhigh = indexOfhigh + 16;
