@@ -6,7 +6,7 @@ var s_p500 = ["A","AAL","AAP","AAPL","ABBV","ABC","ABT","ACN","ADBE","ADI","ADM"
 var s_p500test = ["A","AAL","AAP","AAPL","ABBV","ABC","ABT","ACN","ADBE","COTY"];
 var losers = [];
 var percentages = [];
-
+var dateToSend;
 var date = new Date();
 var localTime = date.getTime();
 var localOffset = date.getTimezoneOffset() * 60000;
@@ -31,6 +31,9 @@ s_p500.forEach(function(stock) {
         console.log("Inside initial request: " + stock);
             
         var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
+        var indexOfDate = indexOfhigh + ("<tr class=\"in-the-money\">").length + ("<td class=\"date\">").length;
+        var indexOfDateEnd = response.indexOf("</td>",indexOfDate+1);
+        dateToSend = response.substring(indexOfDate,indexOfDateEnd);
         indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         indexOfhigh = indexOfhigh + 16;
         indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
@@ -53,7 +56,7 @@ s_p500.forEach(function(stock) {
         // indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
         // daybeforeyesterday = response.substring(indexOfhigh,indexOfHighEnd);
                 
-        console.log("Stock: " + stock + ", Open: " + open + ", Close: " + close);
+        console.log("Stock: " + stock + ", Open: " + open + ", Close: " + close + ", Date To Send: " + dateToSend);
                     
         if (open != 0 && close != 0) {
             let percentageDrop = ((open - close)/open) * 100;
@@ -73,7 +76,7 @@ s_p500.forEach(function(stock) {
 app.listen(process.env.PORT || 1337, () => console.log('server is listening'));
 
 app.get("/losers", (req,res) => {
-    var response = {"date": lastDateRefreshed, "losers": losers, "percentages": percentages};
+    var response = {"date": dateToSend, "losers": losers, "percentages": percentages};
     res.status(200).send(response);
 });
 
