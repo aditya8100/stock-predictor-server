@@ -1,2 +1,2 @@
-# stock-predictor-server
-Server for the stock-predictor
+# Stock Predictor Server
+Server for the https://buythese.ml.
