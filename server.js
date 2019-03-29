@@ -24,7 +24,7 @@ s_p500.forEach(function(stock) {
     let url1 = "https://cloud.iexapis.com/beta/stock/" + stock.toLowerCase() + "/chart/1m?token=pk_6e1d34b7c5bb4d369d2d314043cf4abf";
         
     request.get(url1, (err,body,response) => {
-        if (err != null) {
+        if (err != null || response == "Unknown symbol") {
             console.log(err);
             return;
         }
