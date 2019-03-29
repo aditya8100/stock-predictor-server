@@ -19,7 +19,7 @@ lastDateRefreshed = new Date(nyc);
 
 console.log("Date in initial: " + lastDateRefreshed.toLocaleString());
 
-s_p500test.forEach(function(stock) {
+s_p500.forEach(function(stock) {
     let open = 0, close = 0;
     let url1 = "https://cloud.iexapis.com/beta/stock/" + stock.toLowerCase() + "/chart/1m?token=pk_6e1d34b7c5bb4d369d2d314043cf4abf";
         
@@ -29,39 +29,13 @@ s_p500test.forEach(function(stock) {
             return;
         }
         console.log(stockCounter + ": Inside initial request: " + stock);
-            
-        /*
-        var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
-        var indexOfDate = indexOfhigh + ("<tr class=\"in-the-money\">").length + ("<td class=\"date\">").length + 9;
-        var indexOfDateEnd = response.indexOf("</td>",indexOfDate);
-        dateToSend = response.substring(indexOfDate,indexOfDateEnd);
-        indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        indexOfhigh = indexOfhigh + 16;
-        indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
-        open = response.substring(indexOfhigh,indexOfHighEnd);
-                        
-        indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        indexOfhigh = indexOfhigh + 16;
-        indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
-        close = response.substring(indexOfhigh,indexOfHighEnd);
-        */      
-       let data = JSON.parse(response);
-       console.log("data: " + response)
-       console.log("Response data: " + data[data.length - 1].date);
-       open = data[data.length - 1].open
-       close = data[data.length - 1].close
-       dateToSend = data[data.length - 1].date
+        let data = JSON.parse(response);
+        console.log("data: " + response)
+        console.log("Response data: " + data[data.length - 1].date);
+        open = data[data.length - 1].open
+        close = data[data.length - 1].close
+        dateToSend = data[data.length - 1].date
                     
-        // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-        // indexOfhigh = indexOfhigh + 16;
-        // indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
-        // daybeforeyesterday = response.substring(indexOfhigh,indexOfHighEnd);
                 
         console.log("Stock: " + stock + ", Open: " + open + ", Close: " + close + ", Date To Send: " + dateToSend);
                     
@@ -112,8 +86,8 @@ setInterval(function() {
         percentages = [];
         s_p500.forEach(function(stock) {
             let open = 0, close = 0;
-            let url1 = "https://www.investopedia.com/markets/stocks/" + stock.toLowerCase() + "/historical/"
-                
+            let url1 = "https://cloud.iexapis.com/beta/stock/" + stock.toLowerCase() + "/chart/1m?token=pk_6e1d34b7c5bb4d369d2d314043cf4abf";
+        
             request.get(url1, (err,body,response) => {
                 console.log("Inside refresh request!");
                 if (err != null) {
@@ -121,28 +95,13 @@ setInterval(function() {
                     return;
                 }
                     
-                var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
-                indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                indexOfhigh = indexOfhigh + 16;
-                indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
-                open = response.substring(indexOfhigh,indexOfHighEnd);
-                                
-                indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                indexOfhigh = indexOfhigh + 16;
-                indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
-                close = response.substring(indexOfhigh,indexOfHighEnd);
-                            
-                            
-                // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
-                // indexOfhigh = indexOfhigh + 16;
-                // indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
-                // daybeforeyesterday = response.substring(indexOfhigh,indexOfHighEnd);
+                console.log(stockCounter + ": Inside initial request: " + stock);
+                let data = JSON.parse(response);
+                console.log("data: " + response)
+                console.log("Response data: " + data[data.length - 1].date);
+                open = data[data.length - 1].open
+                close = data[data.length - 1].close
+                dateToSend = data[data.length - 1].date
                         
                 console.log("Stock: " + stock + ", Open: " + open + ", Close: " + close);
                             
