@@ -48,6 +48,7 @@ s_p500test.forEach(function(stock) {
         close = response.substring(indexOfhigh,indexOfHighEnd);
         */      
        
+       console.log("Response response: " + response);
         console.log("Response body: " + body);
         console.log("Length:"  + body.length);
                     
