@@ -48,8 +48,11 @@ s_p500test.forEach(function(stock) {
         close = response.substring(indexOfhigh,indexOfHighEnd);
         */      
        let data = JSON.parse(response);
-       console.log("data: " + data)
+       console.log("data: " + response)
        console.log("Response data: " + data[data.length - 1].date);
+       open = data[data.length - 1].open
+       close = data[data.length - 1].close
+       dateToSend = data[data.length - 1].date
                     
         // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
