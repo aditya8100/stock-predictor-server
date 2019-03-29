@@ -19,9 +19,9 @@ lastDateRefreshed = new Date(nyc);
 
 console.log("Date in initial: " + lastDateRefreshed.toLocaleString());
 
-s_p500.forEach(function(stock) {
+s_p500test.forEach(function(stock) {
     let open = 0, close = 0;
-    let url1 = "https://www.investopedia.com/markets/stocks/" + stock.toLowerCase() + "/historical/"
+    let url1 = "https://cloud.iexapis.com/beta/stock/" + stock.toLowerCase() + "/chart/1m?token=pk_6e1d34b7c5bb4d369d2d314043cf4abf";
         
     request.get(url1, (err,body,response) => {
         if (err != null) {
@@ -30,6 +30,7 @@ s_p500.forEach(function(stock) {
         }
         console.log(stockCounter + ": Inside initial request: " + stock);
             
+        /*
         var indexOfhigh = response.indexOf("<tr class=\"in-the-money\">");
         var indexOfDate = indexOfhigh + ("<tr class=\"in-the-money\">").length + ("<td class=\"date\">").length + 9;
         var indexOfDateEnd = response.indexOf("</td>",indexOfDate);
@@ -45,7 +46,10 @@ s_p500.forEach(function(stock) {
         indexOfhigh = indexOfhigh + 16;
         indexOfHighEnd = response.indexOf("</td>",indexOfhigh);
         close = response.substring(indexOfhigh,indexOfHighEnd);
-                    
+        */      
+       
+        var response_json = JSON.parse(body);
+        console.log(response_json);
                     
         // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
