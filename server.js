@@ -30,6 +30,7 @@ s_p500.forEach(function(stock) {
         }
         console.log(stockCounter + ": Inside initial request: " + stock);
         let data = JSON.parse(response);
+        console.log("url: " + url1);
         console.log("data: " + response)
         console.log("Response data: " + data[data.length - 1].date);
         open = data[data.length - 1].open
