@@ -49,7 +49,7 @@ s_p500test.forEach(function(stock) {
         */      
        let data = JSON.parse(response);
        console.log("data: " + data)
-       console.log("Response data: " + data[data.length - 1]);
+       console.log("Response data: " + data[data.length - 1].date);
                     
         // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
