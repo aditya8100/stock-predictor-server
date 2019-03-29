@@ -48,8 +48,7 @@ s_p500test.forEach(function(stock) {
         close = response.substring(indexOfhigh,indexOfHighEnd);
         */      
        
-       console.log("Response response: " + response);
-        console.log("Length:"  + response.length);
+       console.log("Response response: " + response[response.length - 1].date);
                     
         // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
         // indexOfhigh = response.indexOf("<td class=\"num\">",indexOfhigh + 1);
